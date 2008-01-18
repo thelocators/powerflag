@@ -19,6 +19,13 @@ namespace PowerFlag
 		public PowerFlag()
 		{
 			InitializeComponent();
+			//NLog.Targets.RichTextBoxTarget target = new NLog.Targets.RichTextBoxTarget();
+			//target.Layout = "${message}";
+			//target.ControlName = "outputRTB";
+			//target.FormName = "PowerFlag";
+			//target.UseDefaultRowColoringRules = false;
+
+			//NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Debug);
 		}
 
 		private static void createSettingsFile()
@@ -43,10 +50,10 @@ namespace PowerFlag
 
 		private void flagBTN_Click(object sender, EventArgs e)
 		{
-			doFlagging();
+			DoFlagging();
 		}
 
-		private static void doFlagging()
+		internal static void DoFlagging()
 		{
 			if (!System.IO.File.Exists(SettingsFilepath))
 			{
