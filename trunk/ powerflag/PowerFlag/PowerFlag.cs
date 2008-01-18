@@ -73,5 +73,10 @@ namespace PowerFlag
 
 			FeedToFlag.SaveListToFile(SettingsFilepath, feeds);
 		}
+
+		private void settingsBTN_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
