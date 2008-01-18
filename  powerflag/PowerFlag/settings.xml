@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFeedToFlag xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FeedToFlag>
+    <Feed>
+      <Url>http://chicago.craigslist.org/chc/muc/index.rss</Url>
+    </Feed>
+    <FlagRules>
+      <string>buttons</string>
+      <string>experienced producer</string>
+      <string>live drums for your</string>
+      <string>producer</string>
+      <string>gigs</string>
+      <string>attorney</string>
+      <string>lessons</string>
+      <string>re:</string>
+      <string>acts wanted</string>
+      <string>bands wanted</string>
+      <string>gigs wanted</string>
+      <string>promotion</string>
+      <string>study with</string>
+      <string>rehearse here</string>
+      <string>awesome professional songwriter</string>
+      <string>learn</string>
+      <string>looking for new bandmates?</string>
+      <string>photo</string>
+      <string>open mic</string>
+      <string>rehearsal space</string>
+      <string>mixing</string>
+      <string>mastering</string>
+      <string>looking for bands</string>
+      <string>funeral</string>
+      <string>services</string>
+      <string>shirts</string>
+      <string>instructor</string>
+      <string>recording</string>
+      <string>beats</string>
+      <string>.com</string>
+      <string>tribe of eden</string>
+      <string>lsso</string>
+      <string>open gig slot</string>
+      <string>new look</string>
+      <string>big ups</string>
+      <string>cd dupes</string>
+      <string>site</string>
+      <string>free</string>
+      <string>income</string>
+    </FlagRules>
+  </FeedToFlag>
+  <FeedToFlag>
+    <Feed>
+      <Url>http://chicago.craigslist.org/chc/msg/index.rss</Url>
+    </Feed>
+    <FlagRules>
+      <string>buttons</string>
+      <string>piano</string>
+      <string>lessons</string>
+      <string>kalamazoo</string>
+      <string>re:</string>
+      <string>guitar tab books</string>
+      <string>.com</string>
+    </FlagRules>
+  </FeedToFlag>
+</ArrayOfFeedToFlag>
