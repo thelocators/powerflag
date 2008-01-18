@@ -16,7 +16,12 @@ namespace PowerFlag
 	{
 		private static Logger logger = LogManager.GetCurrentClassLogger();
 
-		public SyndicatedFeed Feed
+		//public SyndicatedFeed Feed
+		//{
+		//    get;
+		//    set;
+		//}
+		public string Url
 		{
 			get;
 			set;
@@ -33,17 +38,17 @@ namespace PowerFlag
 			FlagRules = new List<string>();
 		}
 
-		public List<FlaggedItem> SearchAndFlag()
+		public List<FlaggedItem> SearchAndFlag(SyndicatedFeed feed)
 		{
-			Feed.LoadFeed();
-			List<FlaggedItem> itemsToFlag = getItemsToFlag();
+			feed.LoadFeed();
+			List<FlaggedItem> itemsToFlag = getItemsToFlag(feed);
 
-			flagItems(itemsToFlag);
+			flagItems(feed, itemsToFlag);
 
 			return itemsToFlag;
 		}
 
-		private List<FlaggedItem> getItemsToFlag()
+		private List<FlaggedItem> getItemsToFlag(SyndicatedFeed feed)
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append("(");
@@ -61,7 +66,7 @@ namespace PowerFlag
 			Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			List<FlaggedItem> itemsToFlag = new List<FlaggedItem>();
 
-			foreach (SyndicatedFeed.Item item in Feed.FeedItems)
+			foreach (SyndicatedFeed.Item item in feed.FeedItems)
 			{
 				if (item.HasBeenRead)
 				{
@@ -84,35 +89,35 @@ namespace PowerFlag
 			return itemsToFlag;
 		}
 
-		private void flagItems(List<FlaggedItem> flaggedItems)
+		private void flagItems(SyndicatedFeed feed, List<FlaggedItem> flaggedItems)
 		{
 			Regex itemNumRe = new Regex(@".*\/(?<num>.*?).htm", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 			Regex resultRe = new Regex("thanks for flagging", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 			Regex urlRe = new Regex("(?<url>http://.*?/)", RegexOptions.IgnoreCase);
 
-			if (!urlRe.IsMatch(Feed.Url))
+			if (!urlRe.IsMatch(feed.Url))
 			{
-				logger.Error("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", Feed.Url);
+				logger.Error("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", feed.Url);
 				return;
 			}
 
-			string baseUrl = urlRe.Match(Feed.Url).Groups["url"].Value;
+			string baseUrl = urlRe.Match(feed.Url).Groups["url"].Value;
 
-			foreach (FlaggedItem item in flaggedItems)
-			{
-				MatchCollection matches = itemNumRe.Matches(item.Url);
-				if (matches != null && matches.Count == 1)
-				{
-					string itemNum = matches[0].Groups["num"].Value;
-					string link = string.Format("{0}flag/?flagCode=15&postingID={1}", baseUrl, itemNum);
-					string result = flagItem(link);
-					if (!resultRe.IsMatch(result))
-					{
-						item.Title = string.Concat(item.Title, " -- COULD NOT FLAG!");
-					}
+			//foreach (FlaggedItem item in flaggedItems)
+			//{
+			//    MatchCollection matches = itemNumRe.Matches(item.Url);
+			//    if (matches != null && matches.Count == 1)
+			//    {
+			//        string itemNum = matches[0].Groups["num"].Value;
+			//        string link = string.Format("{0}flag/?flagCode=15&postingID={1}", baseUrl, itemNum);
+			//        string result = flagItem(link);
+			//        if (!resultRe.IsMatch(result))
+			//        {
+			//            item.Title = string.Concat(item.Title, " -- COULD NOT FLAG!");
+			//        }
 
-				}
-			}
+			//    }
+			//}
 		}
 
 		private string flagItem(string link)

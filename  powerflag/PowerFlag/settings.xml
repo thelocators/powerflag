@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfFeedToFlag xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <FeedToFlag>
-    <Feed>
-      <Url>http://chicago.craigslist.org/chc/muc/index.rss</Url>
-    </Feed>
+    <Url>http://chicago.craigslist.org/chc/muc/index.rss</Url>
     <FlagRules>
       <string>buttons</string>
+      <string>need talented musicians</string>
       <string>experienced producer</string>
       <string>live drums for your</string>
+      <string>network</string>
       <string>producer</string>
       <string>gigs</string>
       <string>attorney</string>
@@ -34,6 +34,8 @@
       <string>instructor</string>
       <string>recording</string>
       <string>beats</string>
+      <string>final mix</string>
+      <string>stagehand</string>
       <string>.com</string>
       <string>tribe of eden</string>
       <string>lsso</string>
@@ -44,12 +46,16 @@
       <string>site</string>
       <string>free</string>
       <string>income</string>
+      <string>instruction</string>
+      <string>myspace</string>
+      <string>video</string>
+      <string>cover art</string>
+      <string>duplication</string>
+      <string>magazine</string>
     </FlagRules>
   </FeedToFlag>
   <FeedToFlag>
-    <Feed>
-      <Url>http://chicago.craigslist.org/chc/msg/index.rss</Url>
-    </Feed>
+    <Url>http://chicago.craigslist.org/chc/msg/index.rss</Url>
     <FlagRules>
       <string>buttons</string>
       <string>piano</string>
@@ -58,6 +64,14 @@
       <string>re:</string>
       <string>guitar tab books</string>
       <string>.com</string>
+      <string>instruction</string>
+      <string>steinway</string>
+      <string>memorbilia</string>
+      <string>memoribilia</string>
+      <string>reward</string>
+      <string>rent</string>
+      <string>myspace</string>
+      <string>video</string>
     </FlagRules>
   </FeedToFlag>
 </ArrayOfFeedToFlag>
