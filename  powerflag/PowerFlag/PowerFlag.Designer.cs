@@ -31,6 +31,7 @@
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.flagBTN = new System.Windows.Forms.Button();
 			this.outputRTB = new System.Windows.Forms.RichTextBox();
+			this.settingsBTN = new System.Windows.Forms.Button();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -45,6 +46,7 @@
 			// 
 			// splitContainer1.Panel1
 			// 
+			this.splitContainer1.Panel1.Controls.Add(this.settingsBTN);
 			this.splitContainer1.Panel1.Controls.Add(this.flagBTN);
 			// 
 			// splitContainer1.Panel2
@@ -73,6 +75,16 @@
 			this.outputRTB.TabIndex = 0;
 			this.outputRTB.Text = "";
 			// 
+			// settingsBTN
+			// 
+			this.settingsBTN.Location = new System.Drawing.Point(95, 12);
+			this.settingsBTN.Name = "settingsBTN";
+			this.settingsBTN.Size = new System.Drawing.Size(75, 23);
+			this.settingsBTN.TabIndex = 1;
+			this.settingsBTN.Text = "Settings";
+			this.settingsBTN.UseVisualStyleBackColor = true;
+			this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
+			// 
 			// PowerFlag
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -93,5 +105,6 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.Button flagBTN;
 		private System.Windows.Forms.RichTextBox outputRTB;
+		private System.Windows.Forms.Button settingsBTN;
 	}
 }
