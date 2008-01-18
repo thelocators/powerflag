@@ -23,7 +23,7 @@ namespace PowerFlag
 			{
 				if (args[0] == "-silent")
 				{
-					
+					PowerFlag.DoFlagging();
 				}
 			}
 		}
