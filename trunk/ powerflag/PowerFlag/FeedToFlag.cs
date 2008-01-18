@@ -38,17 +38,6 @@ namespace PowerFlag
 			Feed.LoadFeed();
 			List<FlaggedItem> itemsToFlag = getItemsToFlag();
 
-
-
-			//foreach (string rule in FlagRules)
-			//{
-			//    FlaggedItem flaggedItem = checkFeedAgainstRule(rule, feed);
-			//    if (flaggedItem != null)
-			//    {
-			//        itemsToFlag.Add(flaggedItem);
-			//    }
-			//}
-
 			flagItems(itemsToFlag);
 
 			return itemsToFlag;
@@ -60,14 +49,16 @@ namespace PowerFlag
 			sb.Append("(");
 			foreach (string rule in FlagRules)
 			{
-				sb.AppendFormat("{0}|", rule);
+				sb.AppendFormat(@"\W{0}\W|", rule);
 			}
 
 			sb.Remove(sb.Length - 1, 1);
 
 			sb.Append(")");
 
-			Regex re = new Regex(sb.ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			string reStr = sb.ToString();
+			logger.Debug("Title Search Regex: {0}", reStr);
+			Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			List<FlaggedItem> itemsToFlag = new List<FlaggedItem>();
 
 			foreach (SyndicatedFeed.Item item in Feed.FeedItems)
@@ -119,6 +110,7 @@ namespace PowerFlag
 					{
 						item.Title = string.Concat(item.Title, " -- COULD NOT FLAG!");
 					}
+
 				}
 			}
 		}

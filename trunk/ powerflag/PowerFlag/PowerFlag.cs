@@ -66,6 +66,10 @@ namespace PowerFlag
 			foreach (FeedToFlag feed in feeds)
 			{
 				logger.Debug("Feed: {0}\r\n\r\n", feed.Feed.Url);
+
+				int numRemoved = feed.Feed.PurgeOldItems(Properties.Settings.Default.NumItemsToArchive);
+				logger.Debug(string.Format("{0} old items purged from feed.\r\n", numRemoved));
+
 				List<FlaggedItem> flaggedItems = feed.SearchAndFlag();
 				logger.Debug("{0} items to flag . . .", flaggedItems.Count);
 				foreach (FlaggedItem item in flaggedItems)
@@ -73,8 +77,6 @@ namespace PowerFlag
 					logger.Debug(string.Format("Flagged: {0}\r\n", item.Title));
 				}
 
-				int numRemoved = feed.Feed.PurgeOldItems(Properties.Settings.Default.NumItemsToArchive);
-				logger.Debug(string.Format("{0} old items purged from feed.\r\n", numRemoved));
 				logger.Debug("\r\n\r\n");
 			}
 
