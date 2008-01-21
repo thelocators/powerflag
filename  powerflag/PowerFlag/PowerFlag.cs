@@ -167,5 +167,11 @@ namespace PowerFlag
 				logger.Info("Settings imported.");
 			}
 		}
+
+		private void editBTN_Click(object sender, EventArgs e)
+		{
+			EditForm form = new EditForm();
+			form.Show();
+		}
 	}
 }
