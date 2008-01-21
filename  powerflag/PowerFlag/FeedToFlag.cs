@@ -103,21 +103,6 @@ namespace PowerFlag
 
 			string baseUrl = urlRe.Match(feed.Url).Groups["url"].Value;
 
-			//foreach (FlaggedItem item in flaggedItems)
-			//{
-			//    MatchCollection matches = itemNumRe.Matches(item.Url);
-			//    if (matches != null && matches.Count == 1)
-			//    {
-			//        string itemNum = matches[0].Groups["num"].Value;
-			//        string link = string.Format("{0}flag/?flagCode=15&postingID={1}", baseUrl, itemNum);
-			//        string result = flagItem(link);
-			//        if (!resultRe.IsMatch(result))
-			//        {
-			//            item.Title = string.Concat(item.Title, " -- COULD NOT FLAG!");
-			//        }
-
-			//    }
-			//}
 		}
 
 		private string flagItem(string link)
@@ -171,6 +156,20 @@ namespace PowerFlag
 				XmlSerializer xs = new XmlSerializer(list.GetType());
 				xs.Serialize(sw, list);
 			}
+		}
+
+		public static void EnsureFlagRulesAreUnique(List<FeedToFlag> list)
+		{
+			foreach (FeedToFlag ftf in list)
+			{
+				EnsureFlagRulesAreUnique(ftf);
+			}
+		}
+
+		public static void EnsureFlagRulesAreUnique(FeedToFlag ftf)
+		{
+			HashSet<string> unique = new HashSet<string>(ftf.FlagRules);
+			ftf.FlagRules = unique.ToList();
 		}
 	}
 }
