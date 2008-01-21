@@ -119,5 +119,53 @@ namespace PowerFlag
 		{
 
 		}
+
+		private void importBTN_Click(object sender, EventArgs e)
+		{
+			openFileDialog1.AddExtension = true;
+			openFileDialog1.CheckFileExists = true;
+			openFileDialog1.CheckPathExists = true;
+			openFileDialog1.DefaultExt = ".xml";
+			openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			openFileDialog1.Multiselect = false;
+			openFileDialog1.Title = "Import Settings";
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
+			{
+				importSettings(openFileDialog1.FileName);
+			}
+		}
+
+		private void importSettings(string newFilepath)
+		{
+			List<FeedToFlag> newSettings = FeedToFlag.GetListFromFile(newFilepath);
+			if (newSettings != null && newSettings.Count > 0)
+			{
+				List<FeedToFlag> oldSettings = FeedToFlag.GetListFromFile(SettingsFilepath);
+				Dictionary<string, FeedToFlag> lookup = oldSettings.ToDictionary(ftg => ftg.Url.ToLower());
+
+				FeedToFlag.EnsureFlagRulesAreUnique(newSettings);
+
+				foreach (FeedToFlag ftg in newSettings)
+				{
+					logger.Info("Importing settings for feed: {0}", ftg.Url);
+					if (lookup.ContainsKey(ftg.Url.ToLower()))
+					{
+						logger.Info("Feed already exists.  Importing FlagRules");
+						lookup[ftg.Url.ToLower()].FlagRules.AddRange(ftg.FlagRules);
+					}
+					else
+					{
+						logger.Info("Adding Feed and FlagRules.");
+						oldSettings.Add(ftg);
+					}
+				}
+
+				FeedToFlag.EnsureFlagRulesAreUnique(oldSettings);
+
+				FeedToFlag.SaveListToFile(SettingsFilepath, oldSettings);
+
+				logger.Info("Settings imported.");
+			}
+		}
 	}
 }
