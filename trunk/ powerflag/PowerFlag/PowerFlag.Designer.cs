@@ -29,11 +29,11 @@
 		private void InitializeComponent()
 		{
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.settingsBTN = new System.Windows.Forms.Button();
+			this.importBTN = new System.Windows.Forms.Button();
 			this.flagBTN = new System.Windows.Forms.Button();
 			this.outputRTB = new System.Windows.Forms.RichTextBox();
-			this.importBTN = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.editBTN = new System.Windows.Forms.Button();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -48,8 +48,8 @@
 			// 
 			// splitContainer1.Panel1
 			// 
+			this.splitContainer1.Panel1.Controls.Add(this.editBTN);
 			this.splitContainer1.Panel1.Controls.Add(this.importBTN);
-			this.splitContainer1.Panel1.Controls.Add(this.settingsBTN);
 			this.splitContainer1.Panel1.Controls.Add(this.flagBTN);
 			// 
 			// splitContainer1.Panel2
@@ -59,19 +59,19 @@
 			this.splitContainer1.SplitterDistance = 51;
 			this.splitContainer1.TabIndex = 0;
 			// 
-			// settingsBTN
+			// importBTN
 			// 
-			this.settingsBTN.Location = new System.Drawing.Point(95, 12);
-			this.settingsBTN.Name = "settingsBTN";
-			this.settingsBTN.Size = new System.Drawing.Size(75, 23);
-			this.settingsBTN.TabIndex = 1;
-			this.settingsBTN.Text = "Settings";
-			this.settingsBTN.UseVisualStyleBackColor = true;
-			this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
+			this.importBTN.Location = new System.Drawing.Point(177, 11);
+			this.importBTN.Name = "importBTN";
+			this.importBTN.Size = new System.Drawing.Size(75, 23);
+			this.importBTN.TabIndex = 2;
+			this.importBTN.Text = "Import";
+			this.importBTN.UseVisualStyleBackColor = true;
+			this.importBTN.Click += new System.EventHandler(this.importBTN_Click);
 			// 
 			// flagBTN
 			// 
-			this.flagBTN.Location = new System.Drawing.Point(13, 13);
+			this.flagBTN.Location = new System.Drawing.Point(13, 11);
 			this.flagBTN.Name = "flagBTN";
 			this.flagBTN.Size = new System.Drawing.Size(75, 23);
 			this.flagBTN.TabIndex = 0;
@@ -88,19 +88,19 @@
 			this.outputRTB.TabIndex = 0;
 			this.outputRTB.Text = "";
 			// 
-			// importBTN
-			// 
-			this.importBTN.Location = new System.Drawing.Point(177, 11);
-			this.importBTN.Name = "importBTN";
-			this.importBTN.Size = new System.Drawing.Size(75, 23);
-			this.importBTN.TabIndex = 2;
-			this.importBTN.Text = "Import";
-			this.importBTN.UseVisualStyleBackColor = true;
-			this.importBTN.Click += new System.EventHandler(this.importBTN_Click);
-			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			// 
+			// editBTN
+			// 
+			this.editBTN.Location = new System.Drawing.Point(94, 11);
+			this.editBTN.Name = "editBTN";
+			this.editBTN.Size = new System.Drawing.Size(75, 23);
+			this.editBTN.TabIndex = 3;
+			this.editBTN.Text = "Edit";
+			this.editBTN.UseVisualStyleBackColor = true;
+			this.editBTN.Click += new System.EventHandler(this.editBTN_Click);
 			// 
 			// PowerFlag
 			// 
@@ -122,8 +122,8 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.Button flagBTN;
 		private System.Windows.Forms.RichTextBox outputRTB;
-		private System.Windows.Forms.Button settingsBTN;
 		private System.Windows.Forms.Button importBTN;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private System.Windows.Forms.Button editBTN;
 	}
 }
