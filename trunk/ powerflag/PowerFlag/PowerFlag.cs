@@ -16,7 +16,7 @@ namespace PowerFlag
 {
 	public partial class PowerFlag : Form
 	{
-		public static readonly string SettingsFilepath = "settings.xml";
+		public static readonly string SettingsFilepath = string.Concat(System.Environment.CurrentDirectory, @"\settings.xml");
 		public static readonly string FeedArchiveFilepath = "feedArchive.xml";
 		private static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -138,35 +138,78 @@ namespace PowerFlag
 		private void importSettings(string newFilepath)
 		{
 			List<FeedToFlag> newSettings = FeedToFlag.GetListFromFile(newFilepath);
-			if (newSettings != null && newSettings.Count > 0)
+			if (newSettings == null || newSettings.Count < 1)
 			{
-				List<FeedToFlag> oldSettings = FeedToFlag.GetListFromFile(SettingsFilepath);
-				Dictionary<string, FeedToFlag> lookup = oldSettings.ToDictionary(ftg => ftg.Url.ToLower());
-
-				FeedToFlag.EnsureFlagRulesAreUnique(newSettings);
-
-				foreach (FeedToFlag ftg in newSettings)
-				{
-					logger.Info("Importing settings for feed: {0}", ftg.Url);
-					if (lookup.ContainsKey(ftg.Url.ToLower()))
-					{
-						logger.Info("Feed already exists.  Importing FlagRules");
-						lookup[ftg.Url.ToLower()].FlagRules.AddRange(ftg.FlagRules);
-					}
-					else
-					{
-						logger.Info("Adding Feed and FlagRules.");
-						oldSettings.Add(ftg);
-					}
-				}
-
-				FeedToFlag.EnsureFlagRulesAreUnique(oldSettings);
-
-				FeedToFlag.SaveListToFile(SettingsFilepath, oldSettings);
-
-				logger.Info("Settings imported.");
+				logger.Info("No settings to import in file '{0}'", newFilepath);
+				return;
 			}
+
+			List<FeedToFlag> oldSettings = FeedToFlag.GetListFromFile(SettingsFilepath);
+			Dictionary<string, FeedToFlag> lookup = oldSettings.ToDictionary(ftf => ftf.Url.ToLower());
+
+			foreach (FeedToFlag ftf in newSettings)
+			{
+				logger.Info("Importing settings for feed: {0}", ftf.Url);
+				if (lookup.ContainsKey(ftf.Url.ToLower()))
+				{
+					logger.Info("Feed already exists.  Importing FlagRules");
+					HashSet<string> unique = new HashSet<string>(lookup[ftf.Url.ToLower()].FlagRules);
+					foreach (string rule in ftf.FlagRules)
+					{
+						if (unique.Add(rule))
+						{
+							logger.Info("Adding Rule: {0}", rule);
+						}
+					}
+
+					lookup[ftf.Url.ToLower()].FlagRules = new List<string>(unique);
+				}
+				else
+				{
+					logger.Info("Adding Feed and FlagRules.");
+					oldSettings.Add(ftf);
+				}
+				logger.Info("Feed imported.");
+			}
+
+			FeedToFlag.EnsureFlagRulesAreUnique(oldSettings);
+
+			FeedToFlag.SaveListToFile(SettingsFilepath, oldSettings);
+
+			logger.Info("All settings imported.");
 		}
+		//private void importSettings(string newFilepath)
+		//{
+		//    List<FeedToFlag> newSettings = FeedToFlag.GetListFromFile(newFilepath);
+		//    if (newSettings != null && newSettings.Count > 0)
+		//    {
+		//        List<FeedToFlag> oldSettings = FeedToFlag.GetListFromFile(SettingsFilepath);
+		//        Dictionary<string, FeedToFlag> lookup = oldSettings.ToDictionary(ftg => ftg.Url.ToLower());
+
+		//        FeedToFlag.EnsureFlagRulesAreUnique(newSettings);
+
+		//        foreach (FeedToFlag ftg in newSettings)
+		//        {
+		//            logger.Info("Importing settings for feed: {0}", ftg.Url);
+		//            if (lookup.ContainsKey(ftg.Url.ToLower()))
+		//            {
+		//                logger.Info("Feed already exists.  Importing FlagRules");
+		//                lookup[ftg.Url.ToLower()].FlagRules.AddRange(ftg.FlagRules);
+		//            }
+		//            else
+		//            {
+		//                logger.Info("Adding Feed and FlagRules.");
+		//                oldSettings.Add(ftg);
+		//            }
+		//        }
+
+		//        FeedToFlag.EnsureFlagRulesAreUnique(oldSettings);
+
+		//        FeedToFlag.SaveListToFile(SettingsFilepath, oldSettings);
+
+		//        logger.Info("Settings imported.");
+		//    }
+		//}
 
 		private void editBTN_Click(object sender, EventArgs e)
 		{

@@ -151,6 +151,11 @@ namespace PowerFlag
 
 		public static void SaveListToFile(string filepath, List<FeedToFlag> list)
 		{
+			foreach (FeedToFlag ftf in list)
+			{
+				ftf.FlagRules.Sort();
+			}
+
 			using (StreamWriter sw = new StreamWriter(filepath))
 			{
 				XmlSerializer xs = new XmlSerializer(list.GetType());
