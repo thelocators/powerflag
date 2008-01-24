@@ -53,7 +53,6 @@ namespace Skainix.Syndication
 			}
 
 			var itemsToPurge = (from i in FeedItems
-								where i.HasBeenRead == true
 								orderby i.PubDate ascending
 								select i).Take(FeedItems.Count - numItemsToKeep);
 
