@@ -151,6 +151,7 @@ namespace PowerFlag
 
 		public static void SaveListToFile(string filepath, List<FeedToFlag> list)
 		{
+			EnsureFlagRulesAreUnique(list);
 			foreach (FeedToFlag ftf in list)
 			{
 				ftf.FlagRules.Sort();
