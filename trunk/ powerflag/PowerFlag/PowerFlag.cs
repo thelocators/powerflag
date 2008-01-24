@@ -11,6 +11,7 @@ using Skainix.Syndication;
 using Skainix.SerializationUtils;
 using System.IO;
 using System.Xml.Serialization;
+using NLog.Targets;
 
 namespace PowerFlag
 {
@@ -23,6 +24,12 @@ namespace PowerFlag
 		public PowerFlag()
 		{
 			InitializeComponent();
+			RichTextBoxTarget target = new RichTextBoxTarget();
+			target.Layout = "${message}";
+			target.ControlName = "outputRTB";
+			target.FormName = "PowerFlag";
+			target.UseDefaultRowColoringRules = true;
+			NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(target, LogLevel.Trace);
 		}
 
 		private static void createSettingsFile()
