@@ -80,19 +80,28 @@ namespace PowerFlag
 
 				SyndicatedFeed feed = feedLookup[feedToFlag.Url];
 
-
-				List<FlaggedItem> flaggedItems = feedToFlag.SearchAndFlag(feed);
-				logger.Debug("{0} items to flag . . .", flaggedItems.Count);
-				foreach (FlaggedItem item in flaggedItems)
+				try
 				{
-					logger.Debug(string.Format("Flagged: {0}\r\n", item.Title));
+
+					List<FlaggedItem> flaggedItems = feedToFlag.SearchAndFlag(feed); 
+					logger.Debug("{0} items to flag . . .", flaggedItems.Count);
+					foreach (FlaggedItem item in flaggedItems)
+					{
+						logger.Debug(string.Format("Flagged: {0}\r\n", item.Title));
+					}
+
+
+					int numRemoved = feed.PurgeOldItems(Properties.Settings.Default.NumItemsToArchive);
+					logger.Debug(string.Format("{0} old items purged from feed.\r\n", numRemoved));
+
+					logger.Debug("\r\n\r\n");
 				}
-
-
-				int numRemoved = feed.PurgeOldItems(Properties.Settings.Default.NumItemsToArchive);
-				logger.Debug(string.Format("{0} old items purged from feed.\r\n", numRemoved));
-
-				logger.Debug("\r\n\r\n");
+				catch (Exception e)
+				{
+					logger.Error("Error reading feed {0}:{1}", feed.Url, e);
+					continue;
+				}
+			
 			}
 
 			saveFeedLookup(feedLookup);
