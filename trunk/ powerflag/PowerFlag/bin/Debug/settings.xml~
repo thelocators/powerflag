@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFeedToFlag xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FeedToFlag>
+    <Url>http://chicago.craigslist.org/chc/muc/index.rss</Url>
+    <FlagRules>
+      <string>(all)</string>
+      <string>.com</string>
+      <string>a&amp;r</string>
+      <string>accepting students</string>
+      <string>acts wanted</string>
+      <string>ad words</string>
+      <string>affordable</string>
+      <string>all ages show</string>
+      <string>attorney</string>
+      <string>avenue n</string>
+      <string>awesome professional songwriter</string>
+      <string>bands needed</string>
+      <string>bands wanted</string>
+      <string>barcodes</string>
+      <string>beats</string>
+      <string>better guitar skills now</string>
+      <string>big ups</string>
+      <string>booking</string>
+      <string>boutique effects</string>
+      <string>business</string>
+      <string>buttons</string>
+      <string>cd dupes</string>
+      <string>christian</string>
+      <string>church</string>
+      <string>clubs,bars</string>
+      <string>cool new band</string>
+      <string>cool new bands</string>
+      <string>course</string>
+      <string>cover art</string>
+      <string>creative coach</string>
+      <string>cruise ship</string>
+      <string>duplication</string>
+      <string>ecourse</string>
+      <string>emergenza</string>
+      <string>experienced producer</string>
+      <string>feedback</string>
+      <string>final mix</string>
+      <string>for hire</string>
+      <string>for your event</string>
+      <string>free</string>
+      <string>fresh new flava</string>
+      <string>funeral</string>
+      <string>get more gigs</string>
+      <string>gig slots</string>
+      <string>gigs</string>
+      <string>gigs wanted</string>
+      <string>ground floor opportunity</string>
+      <string>guitarist with skills and knowledge</string>
+      <string>health insurance</string>
+      <string>help</string>
+      <string>hire</string>
+      <string>hot new single</string>
+      <string>hourly rehearsal</string>
+      <string>income</string>
+      <string>instruction</string>
+      <string>instructor</string>
+      <string>iron vein</string>
+      <string>lawyer</string>
+      <string>learn</string>
+      <string>lesson</string>
+      <string>lessons</string>
+      <string>live drums for your</string>
+      <string>looking for a gig</string>
+      <string>looking for bands</string>
+      <string>looking for new bandmates?</string>
+      <string>looking for shows</string>
+      <string>looking for work</string>
+      <string>lsso</string>
+      <string>mad drumming skills</string>
+      <string>magazine</string>
+      <string>major labels</string>
+      <string>make plans</string>
+      <string>management</string>
+      <string>mariachi</string>
+      <string>mastering</string>
+      <string>mix and master</string>
+      <string>mixing</string>
+      <string>music arrangements</string>
+      <string>music label</string>
+      <string>music theory</string>
+      <string>myblogband</string>
+      <string>myspace</string>
+      <string>need talented musicians</string>
+      <string>network</string>
+      <string>new instrumentals</string>
+      <string>new look</string>
+      <string>one</string>
+      <string>open gig slot</string>
+      <string>open mic</string>
+      <string>photo</string>
+      <string>photographer</string>
+      <string>photography</string>
+      <string>photos</string>
+      <string>private course</string>
+      <string>producer</string>
+      <string>professional songwriter</string>
+      <string>promotion</string>
+      <string>radio</string>
+      <string>re:</string>
+      <string>recording</string>
+      <string>rehearsal space</string>
+      <string>rehearse here</string>
+      <string>services</string>
+      <string>shirts</string>
+      <string>site</string>
+      <string>sound city</string>
+      <string>special event</string>
+      <string>stagehand</string>
+      <string>start playing jazz</string>
+      <string>studio for hire</string>
+      <string>study with</string>
+      <string>talented lead/rhythm</string>
+      <string>talented session bassist</string>
+      <string>teacher</string>
+      <string>this is for vocalists</string>
+      <string>three</string>
+      <string>tribe of eden</string>
+      <string>t-shirts</string>
+      <string>two</string>
+      <string>u.s.a.</string>
+      <string>unique drummer /</string>
+      <string>video</string>
+      <string>web</string>
+      <string>work</string>
+      <string>worship team members</string>
+    </FlagRules>
+  </FeedToFlag>
+  <FeedToFlag>
+    <Url>http://chicago.craigslist.org/chc/msg/index.rss</Url>
+    <FlagRules>
+      <string>.com</string>
+      <string>2-string</string>
+      <string>buttons</string>
+      <string>guitar show</string>
+      <string>guitar tab books</string>
+      <string>i will buy</string>
+      <string>instruction</string>
+      <string>kalamazoo</string>
+      <string>lessons</string>
+      <string>memorbilia</string>
+      <string>memoribilia</string>
+      <string>myspace</string>
+      <string>new instrumentals</string>
+      <string>piano</string>
+      <string>re:</string>
+      <string>rent</string>
+      <string>reward</string>
+      <string>steinway</string>
+      <string>video</string>
+    </FlagRules>
+  </FeedToFlag>
+</ArrayOfFeedToFlag>
