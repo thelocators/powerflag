@@ -54,7 +54,7 @@ namespace PowerFlag
 			sb.Append("(");
 			foreach (string rule in FlagRules)
 			{
-				sb.AppendFormat(@"\W{0}\W|", rule);
+				sb.AppendFormat(@"(^|\W){0}($|\W)|", rule);
 			}
 
 			sb.Remove(sb.Length - 1, 1);
@@ -118,26 +118,7 @@ namespace PowerFlag
 			}
 		}
 
-		private FlaggedItem checkFeedAgainstRule(string rule, SyndicatedFeed feed)
-		{
-			Regex titleRe = new Regex(rule, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-			foreach (SyndicatedFeed.Item item in feed.FeedItems)
-			{
-				if (titleRe.IsMatch(item.Title))
-				{
-					return new FlaggedItem
-					{
-						FlaggedRegEx = rule,
-						Title = item.Title,
-						Url = item.Link
-					};
-				}
-
-			}
-
-			return null;
-		}
+	
 
 
 		public static List<FeedToFlag> GetListFromFile(string filepath)
