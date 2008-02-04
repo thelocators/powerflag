@@ -62,7 +62,7 @@ namespace PowerFlag
 			sb.Append(")");
 
 			string reStr = sb.ToString();
-			logger.Debug("Title Search Regex: {0}", reStr);
+			//logger.Debug("Title Search Regex: {0}", reStr);
 			Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			List<FlaggedItem> itemsToFlag = new List<FlaggedItem>();
 
