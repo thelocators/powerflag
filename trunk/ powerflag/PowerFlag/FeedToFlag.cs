@@ -50,20 +50,20 @@ namespace PowerFlag
 
 		private List<FlaggedItem> getItemsToFlag(SyndicatedFeed feed)
 		{
-			StringBuilder sb = new StringBuilder();
-			sb.Append("(");
-			foreach (string rule in FlagRules)
-			{
-				sb.AppendFormat(@"(^|\W){0}($|\W)|", rule);
-			}
+			//StringBuilder sb = new StringBuilder();
+			//sb.Append("(");
+			//foreach (string rule in FlagRules)
+			//{
+			//    sb.AppendFormat(@"(^|\W){0}($|\W)|", rule);
+			//}
 
-			sb.Remove(sb.Length - 1, 1);
+			//sb.Remove(sb.Length - 1, 1);
 
-			sb.Append(")");
+			//sb.Append(")");
 
-			string reStr = sb.ToString();
+			//string reStr = sb.ToString();
 			//logger.Debug("Title Search Regex: {0}", reStr);
-			Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			//Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 			List<FlaggedItem> itemsToFlag = new List<FlaggedItem>();
 
 			foreach (SyndicatedFeed.Item item in feed.FeedItems)
@@ -73,15 +73,23 @@ namespace PowerFlag
 					//this item has already been processed so move along
 					continue;
 				}
-				if (re.IsMatch(item.Title))
+
+				Regex re;
+				foreach (string rule in FlagRules)
 				{
-					itemsToFlag.Add(new FlaggedItem
+					string reStr = string.Format(@"(^|\w){0}($|\W)", rule);
+					re = new Regex(reStr, RegexOptions.IgnoreCase);
+					if (re.IsMatch(item.Title))
 					{
-						FlaggedRegEx = re.ToString(),
-						Title = item.Title,
-						Url = item.Link
-					});
-					item.HasBeenRead = true;
+						itemsToFlag.Add(new FlaggedItem
+						{
+							FlaggedRegEx = re.ToString(),
+							Title = item.Title,
+							Url = item.Link
+						});
+						item.HasBeenRead = true;
+						break;
+					}
 				}
 
 			}
