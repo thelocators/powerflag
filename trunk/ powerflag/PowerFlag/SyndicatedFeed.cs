@@ -52,20 +52,30 @@ namespace Skainix.Syndication
 				return 0;
 			}
 
-			var itemsToPurge = (from i in FeedItems
-								orderby i.PubDate ascending
-								select i).Take(FeedItems.Count - numItemsToKeep);
+			var itemsToKeep = (from i in FeedItems
+						 orderby i.PubDate descending
+						 select i).Take(numItemsToKeep);
 
-			int numRemoved = 0;
-			foreach (SyndicatedFeed.Item item in itemsToPurge)
-			{
-				if (FeedItems.Remove(item))
-				{
-					numRemoved++;
-				}
-			}
+			int numRemoved = FeedItems.Count - numItemsToKeep;
+
+			FeedItems = itemsToKeep.ToList();
 
 			return numRemoved;
+
+			//var itemsToPurge = (from i in FeedItems
+			//                    orderby i.PubDate ascending
+			//                    select i).Take(FeedItems.Count - numItemsToKeep);
+
+			//int numRemoved = 0;
+			//foreach (SyndicatedFeed.Item item in itemsToPurge)
+			//{
+			//    if (FeedItems.Remove(item))
+			//    {
+			//        numRemoved++;
+			//    }
+			//}
+
+			//return numRemoved;
 		}
 
 		public void LoadFeed()
