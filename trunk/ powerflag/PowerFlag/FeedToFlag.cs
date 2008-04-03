@@ -41,14 +41,12 @@ namespace PowerFlag
 		public List<FlaggedItem> SearchAndFlag(SyndicatedFeed feed)
 		{
 			feed.LoadFeed();
-			List<FlaggedItem> itemsToFlag = getItemsToFlag(feed);
+			List<FlaggedItem> flaggedItems = flagItems(feed);
 
-			flagItems(feed, itemsToFlag);
-
-			return itemsToFlag;
+			return flaggedItems;
 		}
 
-		private List<FlaggedItem> getItemsToFlag(SyndicatedFeed feed)
+		private List<FlaggedItem> flagItems(SyndicatedFeed feed)
 		{
 			//StringBuilder sb = new StringBuilder();
 			//sb.Append("(");
@@ -64,7 +62,21 @@ namespace PowerFlag
 			//string reStr = sb.ToString();
 			//logger.Debug("Title Search Regex: {0}", reStr);
 			//Regex re = new Regex(reStr, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-			List<FlaggedItem> itemsToFlag = new List<FlaggedItem>();
+			List<FlaggedItem> flaggedItems = new List<FlaggedItem>();
+
+
+			Regex itemNumRe = new Regex(@".*\/(?<num>.*?).htm", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+			Regex resultRe = new Regex("thanks for flagging", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+			Regex urlRe = new Regex("(?<url>http://.*?/)", RegexOptions.IgnoreCase);
+
+			if (!urlRe.IsMatch(feed.Url))
+			{
+				logger.Error("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", feed.Url);
+				throw new ApplicationException(string.Format("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", feed.Url));
+			}
+
+			string baseUrl = urlRe.Match(feed.Url).Groups["url"].Value;
+			string flagFormat = string.Concat(baseUrl, "flag/?flagCode=15&postingID={0}");
 
 			foreach (SyndicatedFeed.Item item in feed.FeedItems)
 			{
@@ -75,43 +87,67 @@ namespace PowerFlag
 				}
 
 				Regex re;
+
 				foreach (string rule in FlagRules)
 				{
 					string reStr = string.Format(@"(^|\w){0}($|\W)", rule);
 					re = new Regex(reStr, RegexOptions.IgnoreCase);
 					if (re.IsMatch(item.Title))
 					{
-						itemsToFlag.Add(new FlaggedItem
+						FlaggedItem fi = new FlaggedItem
 						{
 							FlaggedRegEx = re.ToString(),
 							Title = item.Title,
 							Url = item.Link
-						});
-						item.HasBeenRead = true;
+						};
+
+						string itemNum = itemNumRe.Match(fi.Url).Groups["num"].Value;
+						string link = string.Format(flagFormat, itemNum);
+						string result = flagItem(link);
+						if (resultRe.IsMatch(result))
+						{
+							flaggedItems.Add(fi);
+						}
+
 						break;
 					}
 				}
 
 			}
 
-			return itemsToFlag;
+			return flaggedItems;
 		}
 
-		private void flagItems(SyndicatedFeed feed, List<FlaggedItem> flaggedItems)
-		{
-			Regex itemNumRe = new Regex(@".*\/(?<num>.*?).htm", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-			Regex resultRe = new Regex("thanks for flagging", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-			Regex urlRe = new Regex("(?<url>http://.*?/)", RegexOptions.IgnoreCase);
 
-			if (!urlRe.IsMatch(feed.Url))
-			{
-				logger.Error("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", feed.Url);
-				return;
-			}
+		//private void flagItems(SyndicatedFeed feed, List<FlaggedItem> flaggedItems)
+		//{
+		//    Regex itemNumRe = new Regex(@".*\/(?<num>.*?).htm", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		//    Regex resultRe = new Regex("thanks for flagging", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		//    Regex urlRe = new Regex("(?<url>http://.*?/)", RegexOptions.IgnoreCase);
 
-			string baseUrl = urlRe.Match(feed.Url).Groups["url"].Value;
+		//    if (!urlRe.IsMatch(feed.Url))
+		//    {
+		//        logger.Error("Error in FeedToFlag.flagItems: Could not parse base URL out of Feed URL: {0}", feed.Url);
+		//        return;
+		//    }
 
-		}
+		//    string baseUrl = urlRe.Match(feed.Url).Groups["url"].Value;
+		//    string flagFormat = string.Concat(baseUrl, "flag/?flagCode=15&postingID={1}");
+
+		//    flaggedItems.ForEach(fi =>
+		//    {
+		//        string itemNum = itemNumRe.Match(fi.Url).Groups["num"].Value;
+		//        string link = string.Format(flagFormat, itemNum);
+		//        string result = flagItem(link);
+		//        if (resultRe.IsMatch(result))
+		//        {
+		//            fi.h
+		//        }
+		//    }
+		//    );
+				
+
+		//}
 
 		private string flagItem(string link)
 		{

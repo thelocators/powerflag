@@ -82,7 +82,7 @@ namespace PowerFlag
 					logger.Debug("{0} items to flag . . .", flaggedItems.Count);
 					foreach (FlaggedItem item in flaggedItems)
 					{
-						logger.Debug(string.Format("Flagged: {0}\r\n", item.Title));
+						logger.Debug(string.Format("Flagged ({1}): {0}\r\n", item.Title, item.FlaggedRegEx));
 					}
 
 
