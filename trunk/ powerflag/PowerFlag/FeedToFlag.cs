@@ -107,6 +107,7 @@ namespace PowerFlag
 						if (resultRe.IsMatch(result))
 						{
 							flaggedItems.Add(fi);
+							item.HasBeenRead = true;
 						}
 
 						break;
