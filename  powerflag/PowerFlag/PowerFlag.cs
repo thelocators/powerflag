@@ -17,8 +17,8 @@ namespace PowerFlag
 {
 	public partial class PowerFlag : Form
 	{
-		public static readonly string SettingsFilepath = string.Concat(System.Environment.CurrentDirectory, @"\settings.xml");
-		public static readonly string FeedArchiveFilepath = "feedArchive.xml";
+		public static readonly string SettingsFilepath = string.Concat(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), @"\settings.xml");
+		public static readonly string FeedArchiveFilepath = string.Concat(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), @"\feedArchive.xml");
 		private static Logger logger = LogManager.GetCurrentClassLogger();
 
 		public PowerFlag()
@@ -53,6 +53,7 @@ namespace PowerFlag
 
 		internal static void DoFlagging()
 		{
+			//logger.Debug("\r\nSettingsFilepath:{0}\r\nFeedArchiveFilepath:{1}", SettingsFilepath, FeedArchiveFilepath);
 			if (!File.Exists(SettingsFilepath))
 			{
 				logger.Debug("Settings file not found.  Creating new . . .");
