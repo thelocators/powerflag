@@ -90,7 +90,7 @@ namespace PowerFlag
 
 				foreach (string rule in FlagRules)
 				{
-					string reStr = string.Format(@"(^|\w){0}($|\W)", rule);
+					string reStr = string.Format(@"(^|\W){0}($|\W)", rule);
 					re = new Regex(reStr, RegexOptions.IgnoreCase);
 					if (re.IsMatch(item.Title))
 					{
