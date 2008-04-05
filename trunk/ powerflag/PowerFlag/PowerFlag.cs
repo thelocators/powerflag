@@ -227,5 +227,13 @@ namespace PowerFlag
 			EditForm form = new EditForm();
 			form.Show();
 		}
+
+		private void recentBTN_Click(object sender, EventArgs e)
+		{
+			SerializableDictionary<string, SyndicatedFeed> feedLookup = getFeedLookup();
+			Recent r = new Recent();
+			r.LoadFeeds(feedLookup.Values);
+			r.Show();
+		}
 	}
 }
