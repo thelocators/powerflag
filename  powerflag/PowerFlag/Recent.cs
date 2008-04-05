@@ -25,7 +25,7 @@ namespace PowerFlag
 			{
 				var flagged = from SyndicatedFeed.Item i in f.FeedItems
 							  where i.HasBeenRead
-							  orderby i.PubDate
+							  orderby i.PubDate descending
 							  select i;
 
 				sb.AppendFormat("Feed: {0}\r\n", f.Url);
@@ -34,7 +34,7 @@ namespace PowerFlag
 				{
 					foreach (SyndicatedFeed.Item i in flagged)
 					{
-						sb.AppendFormat("\tFlagged: {0}\r\n", i.Title);
+						sb.AppendFormat("\t{1} - Flagged: {0}\r\n", i.Title, i.PubDate.ToShortDateString());
 					}
 				}
 
