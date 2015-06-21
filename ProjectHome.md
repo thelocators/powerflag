@@ -1,0 +1,1 @@
+I've become so fed up with the spammers on my local Craigslist that I decided to write this program.  It allows you to enter a list of RSS feeds from Craigslist.com.  For each of these feeds you are able to enter a list of search terms.  If any item's title within the feed's items matches one of the search terms then that item is immediately flagged as spam.
